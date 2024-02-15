@@ -12,6 +12,7 @@ def init_db():
 
 def start_app():
     create_employee_from_web(5)
+    # update_employee()
 
 
 if __name__ == '__main__':
