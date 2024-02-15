@@ -33,3 +33,31 @@ def create_employee_from_web(id: int = 1):
     finally:
         if sqlite_connection:
             sqlite_connection.close()
+
+
+def update_employee(id: int, new_value):
+    update_employee_query = f'''
+        UPDATE employees 
+        SET first_name = ?
+        WHERE id = ?
+    '''
+    
+    try:
+        sqlite_connection = sqlite3.connect(DB_NAME)
+        cursor = sqlite_connection.cursor()
+
+        cursor.execute(update_employee_query, (new_value, id))
+        sqlite_connection.commit()
+        
+        cursor.close()
+        return f'INFO: Podaci su uspjesno pohranjeni u bazu!'
+
+    except sqlite3.Error as sql_error:
+        print(f'ERROR: Dogodila se SQLite greska {sql_error}')
+
+    except Exception as ex:
+        print(f'ERROR: Dogodila se greska {ex}')
+
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
