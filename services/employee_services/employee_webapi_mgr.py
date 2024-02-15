@@ -1,9 +1,16 @@
-# Sve funkcije vezane uz manipulaciju podacima djelatnika 
-# na REST api serveru
 import requests
 
+from commons.app_constants import BASE_URL
 
-# TODO implement try except
-response = requests.get('https://jsonplaceholder.typicode.com/users/1')
-if response.status_code == 200:
-    print(response.json())
+
+def get_employee(id: int = 1) -> dict:
+    try:
+        response = requests.get(f'{BASE_URL}/{id}')
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return response.status_code
+
+    
+    except Exception as ex:
+        return f'ERROR: Dogodila se greska {ex}'
