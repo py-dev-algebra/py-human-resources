@@ -2,8 +2,6 @@ import sqlite3
 
 from commons.app_constants import DB_NAME
 
-
-
 def create_table(create_table_query: str) -> str:
     try:
         sqlite_connection = sqlite3.connect(DB_NAME)
